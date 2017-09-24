@@ -33,9 +33,6 @@ public class SpreadsheetService {
 	/** Application name. */
 	private static final String APPLICATION_NAME = "Google Sheets API Java";
 
-	/** Id Spreadsheet */
-	private static final String spreadsheetId = "1oTdLC5FcoIMXozp5ydBvlXdKP_MJOqUPe_YDjNgEdpQ"; // "1KIy4KTlG_byrqzViOQuWDd3cuBrlDnwLkFCLk43sRDQ";
-
 	/** Directory to store user credentials for this application. */
 	private static final java.io.File DATA_STORE_DIR = new java.io.File(System.getProperty("user.home"),
 			".credentials/sheets.googleapis.com-java-quickstart");
@@ -126,8 +123,8 @@ public class SpreadsheetService {
 		return valueRange;
 	}
 
-	public void updateFile(final Map<String, Map<String, Integer>> usersCharsStars, final Map<String, Map<String, Integer>> usersShipsStars)
-			throws IOException {
+	public void updateFile(final String spreadsheetId, final Map<String, Map<String, Integer>> usersCharsStars,
+			final Map<String, Map<String, Integer>> usersShipsStars) throws IOException {
 		ValueRange valueRange = createValueRange(usersCharsStars, usersShipsStars);
 		service.spreadsheets().values().update(spreadsheetId, valueRange.getRange(), valueRange).setValueInputOption("RAW").execute();
 	}

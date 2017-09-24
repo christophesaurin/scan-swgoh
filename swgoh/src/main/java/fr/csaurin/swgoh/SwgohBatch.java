@@ -9,7 +9,12 @@ import java.util.Map;
 public class SwgohBatch {
 
 	public static void main(final String[] args) throws Exception {
+		if (args.length != 1) {
+			System.out.println("Usage : SwgohBatch spreadsheetId");
+			System.exit(-1);
+		}
 		System.out.println("Initialisation du batch");
+		String spreadsheetId = args[0];
 		SwgohService scanSwgoh = new SwgohService();
 		SpreadsheetService googleSpreadsheet = new SpreadsheetService();
 
@@ -21,7 +26,7 @@ public class SwgohBatch {
 		Map<String, Map<String, Integer>> usersShipsStars = scanSwgoh.readShips(users);
 
 		System.out.println("Mise à jour du fichier google");
-		googleSpreadsheet.updateFile(usersCharsStars, usersShipsStars);
+		googleSpreadsheet.updateFile(spreadsheetId, usersCharsStars, usersShipsStars);
 		System.out.println("Traitement terminé");
 	}
 
